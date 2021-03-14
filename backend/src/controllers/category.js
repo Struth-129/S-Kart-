@@ -23,11 +23,16 @@ function createCategories(categories,parentId = null){
 
 
 exports.addCategory = (req,res)=>{
+    let categoryUrl;
+    
     const categoryObj = {
         name: req.body.name,
         slug: slugify(req.body.name)
     }
-
+    if(req.file){
+        categoryUrl = 'http://localhost:8000/public/'+req.file.filename
+        categoryObj.categoryImage = categoryUrl;
+    }
     if(req.body.parentId){
         categoryObj.parentId = req.body.parentId;
     }
