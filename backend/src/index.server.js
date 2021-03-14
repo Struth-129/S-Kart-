@@ -14,9 +14,9 @@ const cartRoutes = require('./routes/cart');
 const path = require('path');
 
 mongoose.connect(`mongodb+srv://struth:Saket@123@cluster0.b9wuc.mongodb.net/ecommerce?retryWrites=true&w=majority`,
-    {useNewUrlParser: true, 
+    {   useNewUrlParser: true, 
         useUnifiedTopology: true,
-    useCreateIndex:true})
+        useCreateIndex:true})
         .then(()=>{
             console.log("Connected");
         }).catch((e)=>{
