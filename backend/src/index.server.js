@@ -12,7 +12,7 @@ const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
 const cartRoutes = require('./routes/cart');
 const path = require('path');
-
+const cors = require('cors');
 mongoose.connect(`mongodb+srv://struth:Saket@123@cluster0.b9wuc.mongodb.net/ecommerce?retryWrites=true&w=majority`,
     {   useNewUrlParser: true, 
         useUnifiedTopology: true,
@@ -22,8 +22,9 @@ mongoose.connect(`mongodb+srv://struth:Saket@123@cluster0.b9wuc.mongodb.net/ecom
         }).catch((e)=>{
             console.log(e);
         })
-
+app.use(cors());
 app.use(express.json());
+
 app.use('/public',express.static(path.join(__dirname,'uploads')));
 app.use('/api',userRoutes);
 app.use('/api',adminRoutes);
