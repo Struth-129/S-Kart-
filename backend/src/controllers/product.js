@@ -35,7 +35,7 @@ exports.createProduct = (req,res)=>{
             })
         }
         if(product){
-            res.status(201).json({ product });
+            res.status(200).json({ product });
         }
     }))
     

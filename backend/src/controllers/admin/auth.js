@@ -35,7 +35,7 @@ exports.signup = (req,res)=>{
                 });
             }
             if(data){
-                return res.status(201).json({
+                return res.status(200).json({
                     user:'Admin created successfully'
                 })
             }
