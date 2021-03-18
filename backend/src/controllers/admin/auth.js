@@ -4,11 +4,12 @@ const JWT_SECRET = "MERNSECRET";
 const express = require("express");
 const app = express();
 const { validationResult } = require('express-validator');
-
+const bcrypt = require("bcrypt")
+const shortid = require("shortid");
 app.use(express.json());
 exports.signup = (req,res)=>{
     User.findOne({email:req.body.email})
-    .exec((error,user)=>{
+    .exec(async(error,user)=>{
         if(user){
             return res.status(400).json({
                 message:'Admin Already exist'
@@ -20,13 +21,14 @@ exports.signup = (req,res)=>{
             email,
             password
         } = req.body;
+        const hash_password = await bcrypt.hash(password, 10);
         const _user = new User(
             { firstName,
               lastName,
               email,
-              password,
+              hash_password,
               role:'admin',
-            username:Math.random().toString() 
+              username:shortid.generate() 
         });
         _user.save((error, data)=>{
             if(error){
@@ -53,9 +55,9 @@ exports.signin = (req,res)=>{
         }if(user){
             if(user.authenticate(req.body.password)&&user.role === 'admin'){
 
-                const token = jwt.sign({_id: user._id,role: user.role},JWT_SECRET,{expiresIn: '1h'});
+                const token = jwt.sign({_id: user._id,role: user.role},JWT_SECRET,{expiresIn: '1d'});
                 const {_id,firstName,lastName,email,role,fullName} = user;
-                res.cookie('token',token,{expiresIn:'1h'});
+                res.cookie('token',token,{expiresIn:'1d'});
                 res.status(200).json({
                     token,
                     user: {
