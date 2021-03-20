@@ -18,14 +18,12 @@ function createCategories(categories,parentId = null){
             children: createCategories(categories, cate._id)
         });
     }
-
     return categoriesList;
 }
 
 
 exports.addCategory = (req,res)=>{
-    let categoryUrl;
-    
+    let categoryUrl;   
     const categoryObj = {
         name: req.body.name,
         slug: slugify(req.body.name)
@@ -37,7 +35,6 @@ exports.addCategory = (req,res)=>{
     if(req.body.parentId){
         categoryObj.parentId = req.body.parentId;
     }
-
     const cat = new Category(categoryObj);
     cat.save((error, category)=>{
         if(error) return res.status(400).json({error}); 
@@ -52,10 +49,12 @@ exports.getCategories = (req,res) =>{
     .exec((error,categories)=>{
         if(error) return res.status(400).json({error});
         if(categories){
-
             const categoryList = createCategories(categories);
-
             res.status(200).json({ categoryList });
         }
     })
+}
+
+exports.updateCategories = (req,res) = {
+    
 }
