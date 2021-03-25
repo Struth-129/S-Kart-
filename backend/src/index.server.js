@@ -14,6 +14,7 @@ const cartRoutes = require('./routes/cart');
 const initialDataRoutes = require('./routes/admin/initialData');
 const path = require('path');
 const cors = require('cors');
+const pageRoutes = require('./routes/admin/page')
 mongoose.connect(`mongodb+srv://struth:Saket@123@cluster0.b9wuc.mongodb.net/ecommerce?retryWrites=true&w=majority`,
     {   useNewUrlParser: true, 
         useUnifiedTopology: true,
@@ -33,6 +34,7 @@ app.use('/api',categoryRoutes);
 app.use('/api',productRoutes);
 app.use('/api',cartRoutes);
 app.use('/api',initialDataRoutes);
+app.use('/api',pageRoutes)
 
 // listen to port 8000
 app.listen(port,()=>{
