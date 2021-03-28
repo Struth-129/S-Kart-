@@ -1,11 +1,10 @@
-const express = require("express");
-const { initialData } = require("../../controllers/admin/initialData");
+const express = require('express');
+const { requireSignin, adminMiddleware } = require('../../common-middleware');
+const { initialData } = require('../../controller/admin/initialData');
 const router = express.Router();
-const { upload, adminMiddleware, requireSignin } = require("../../common-middleware");
-
-router.post('/initialData',requireSignin,adminMiddleware,initialData);
 
 
+router.post('/initialdata', requireSignin, adminMiddleware, initialData);
 
 
 module.exports = router;

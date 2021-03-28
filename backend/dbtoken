@@ -1,4 +1,0 @@
-mongodb+srv://struth:<password>@cluster0.b9wuc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true});
